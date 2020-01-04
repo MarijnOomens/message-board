@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Messages</title>
+  </head>
+  <body>
+    <h1>Write a message</h1>
+    <form id="form">
+      <div>
+        <input
+          type="text"
+          id="message-title"
+          placeholder="Enter title"
+          maxlength="30"
+          required
+        />
+      </div>
+
+      <div>
+        <input
+          type="text"
+          id="message-body"
+          placeholder="Message"
+          maxlength="255"
+          required
+        />
+      </div>
+
+      <div>
+        <input
+          type="text"
+          id="message-name"
+          placeholder="Enter your name"
+          maxlength="20"
+          required
+        />
+      </div>
+
+      <button type="submit">
+        Send message
+      </button>
+    </form>
+    <hr>
+    <h1>Messages</h1>
+    <div id="messages">
+
+    </div>
+    <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script>
+        // Socket.io
+        const socket = io('localhost:3030');
+
+        // Feathers app
+        const app = feathers();
+
+        // Socket.io with server
+        app.configure(feathers.socketio(socket));
+
+        document.getElementById('form').addEventListener('submit', sendMessage);
+
+        function sendMessage(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('message-title');
+            const body = document.getElementById('message-body');
+            const name = document.getElementById('message-name');
+
+            
+            app.service('messages').create({
+                title: title.value,
+                body: body.value,
+                name: name.value
+            });
+
+            title.value = '';
+            body.value = '';
+            name.value = '';
+        }
+
+        function renderMessage(message) {
+          document.getElementById('messages').innerHTML += `
+          <div>
+            <h3>${message.title}</h3>
+            <p>${message.body}</p>
+            <b>${message.name}</b>
+            <p>${message.time}</p>
+          </div>
+          <hr>
+          `
+        }
+    </script>
+  </body>
+</html>

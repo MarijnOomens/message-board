@@ -1,0 +1,26 @@
+{
+  "name": "message-board",
+  "version": "1.0.0",
+  "description": "A realtime message board made using feathers.js, Socket.io and Express",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarijnOomens/message-board.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarijnOomens/message-board/issues"
+  },
+  "homepage": "https://github.com/MarijnOomens/message-board#readme",
+  "dependencies": {
+    "@feathersjs/express": "^4.4.3",
+    "@feathersjs/feathers": "^4.4.3",
+    "@feathersjs/socketio": "^4.4.3",
+    "moment": "^2.24.0"
+  }
+}
