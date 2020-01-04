@@ -58,9 +58,3 @@ const PORT = process.env.PORT || 3030;
 app.listen(PORT).on('listening', () => {
     console.log(`Realtime server running on port ${PORT}`);
 });
-
-// app.service('messages').create({
-//     title: 'Yo yo',
-//     body: 'Wadup',
-//     name: 'Vladislav'
-// });

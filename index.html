@@ -86,12 +86,20 @@
           <div>
             <h3>${message.title}</h3>
             <p>${message.body}</p>
-            <b>${message.name}</b>
+            <i> - ${message.name}</i>
             <p>${message.time}</p>
           </div>
           <hr>
           `
         }
+
+        async function init() {
+          const messages = await app.service('messages').find();
+          messages.forEach(renderMessage);
+          app.service('messages').on('created', renderMessage);
+        }
+
+        init();
     </script>
   </body>
 </html>
